@@ -43,24 +43,32 @@ export const getUsersList = async (): Promise<Array<UserData>> => {
 
 export const deleteuser = async (id: number) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
-	const olddata:UserData|{id:null} = await supabase
+	const olddata: {
+		id?: number;
+		created_at: string;
+		bsky_password: string;
+		github_name: string;
+		fail_count: number;
+		iv: string;
+		DID: string;
+	} = await supabase
 		.from(table_name)
 		.select()
 		.eq("id", id)
 		.then(async (data) => {
-			if ((!/2\d{2}/.test(data.status.toString()))||!data.data) {
-				await writelog(JSON.stringify(data))
+			if (!/2\d{2}/.test(data.status.toString()) || !data.data) {
+				await writelog(JSON.stringify(data));
 				throw new Error(`エラー:${data.status}`);
 			}
 			return data.data[0];
 		});
-	olddata.id=null
+	olddata.id = undefined;
 	await supabase
 		.from("deleted")
 		.insert(olddata)
 		.then(async (data) => {
 			if (!/2\d{2}/.test(data.status.toString())) {
-				await writelog(JSON.stringify(data))
+				await writelog(JSON.stringify(data));
 				throw new Error(`エラー:${data.status}`);
 			}
 		});
@@ -70,7 +78,7 @@ export const deleteuser = async (id: number) => {
 		.eq("id", id)
 		.then(async (data) => {
 			if (!/2\d{2}/.test(data.status.toString())) {
-				await writelog(JSON.stringify(data))
+				await writelog(JSON.stringify(data));
 				throw new Error(`エラー:${data.status}`);
 			}
 		});
