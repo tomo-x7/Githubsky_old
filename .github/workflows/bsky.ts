@@ -65,8 +65,8 @@ export const post = async (
 				facets: message.facets,
 				createdAt: new Date().toISOString(),
 			});
-			success(id);
 		}
+		success(id);
 	} catch (e) {
 		writelog(`${DID}の投稿時エラー\n${e}`);
 		fail(id, fail_count);

@@ -11,7 +11,7 @@ const main = async () => {
 
 	for (const i in userslist) {
 		try {
-			if(userslist[i].fail_count>3){
+			if(userslist[i].fail_count>7){
                 console.log(`id=${userslist[i].id},DID=${userslist[i].DID}を削除:fail_count=${userslist[i].fail_count}`)
             }
 		} catch (e) {

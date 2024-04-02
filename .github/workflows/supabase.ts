@@ -43,15 +43,33 @@ export const getUsersList = async (): Promise<Array<UserData>> => {
 
 export const deleteuser = async (id: number) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
-	supabase
+	const olddata = await supabase
 		.from(table_name)
-		.delete()
+		.select()
 		.eq("id", id)
 		.then((data) => {
 			if (!/2\d{2}/.test(data.status.toString())) {
 				throw new Error("エラー");
 			}
+			return data[0];
 		});
+	await supabase
+		.from("deleted")
+		.insert(olddata)
+		.then((data) => {
+			if (!/2\d{2}/.test(data.status.toString())) {
+				throw new Error("エラー");
+			}
+		});
+	// supabase
+	// 	.from(table_name)
+	// 	.delete()
+	// 	.eq("id", id)
+	// 	.then((data) => {
+	// 		if (!/2\d{2}/.test(data.status.toString())) {
+	// 			throw new Error("エラー");
+	// 		}
+	// 	});
 };
 export const success = async (id: number) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
