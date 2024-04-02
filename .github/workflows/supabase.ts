@@ -61,15 +61,15 @@ export const deleteuser = async (id: number) => {
 				throw new Error("エラー");
 			}
 		});
-	// supabase
-	// 	.from(table_name)
-	// 	.delete()
-	// 	.eq("id", id)
-	// 	.then((data) => {
-	// 		if (!/2\d{2}/.test(data.status.toString())) {
-	// 			throw new Error("エラー");
-	// 		}
-	// 	});
+	supabase
+		.from(table_name)
+		.delete()
+		.eq("id", id)
+		.then((data) => {
+			if (!/2\d{2}/.test(data.status.toString())) {
+				throw new Error("エラー");
+			}
+		});
 };
 export const success = async (id: number) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
