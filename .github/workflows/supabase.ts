@@ -43,7 +43,7 @@ export const getUsersList = async (): Promise<Array<UserData>> => {
 
 export const deleteuser = async (id: number) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
-	const olddata:UserData = await supabase
+	const olddata:UserData|{id:null} = await supabase
 		.from(table_name)
 		.select()
 		.eq("id", id)
@@ -53,6 +53,7 @@ export const deleteuser = async (id: number) => {
 			}
 			return data.data[0];
 		});
+	olddata.id=null
 	await supabase
 		.from("deleted")
 		.insert(olddata)
