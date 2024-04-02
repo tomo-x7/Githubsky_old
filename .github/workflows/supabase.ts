@@ -63,10 +63,10 @@ export const deleteuser = async (id: number) => {
 			}
 			return data.data[0];
 		});
-	olddata.id = undefined;
 	await supabase
 		.from("deleted")
 		.insert({
+			old_id:olddata.id,
 			created_at:olddata.created_at,
 			bsky_handle: olddata.bsky_handle,
 			bsky_password: olddata.bsky_password,
