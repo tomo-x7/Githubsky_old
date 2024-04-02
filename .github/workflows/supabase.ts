@@ -45,6 +45,7 @@ export const deleteuser = async (id: number) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
 	const olddata: {
 		id?: number;
+		bsky_handle?: string;
 		created_at: string;
 		bsky_password: string;
 		github_name: string;
@@ -65,7 +66,15 @@ export const deleteuser = async (id: number) => {
 	olddata.id = undefined;
 	await supabase
 		.from("deleted")
-		.insert(olddata)
+		.insert({
+			created_at:olddata.created_at,
+			bsky_handle: olddata.bsky_handle,
+			bsky_password: olddata.bsky_password,
+			github_name: olddata.github_name,
+			fail_count: olddata.fail_count,
+			iv: olddata.iv,
+			DID: olddata.DID,
+		})
 		.then(async (data) => {
 			if (!/2\d{2}/.test(data.status.toString())) {
 				await writelog(JSON.stringify(data));
