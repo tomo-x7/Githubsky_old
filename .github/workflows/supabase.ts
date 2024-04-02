@@ -48,10 +48,10 @@ export const deleteuser = async (id: number) => {
 		.select()
 		.eq("id", id)
 		.then((data) => {
-			if (!/2\d{2}/.test(data.status.toString())) {
+			if ((!/2\d{2}/.test(data.status.toString()))||!data.data) {
 				throw new Error("エラー");
 			}
-			return data[0];
+			return data.data[0];
 		});
 	await supabase
 		.from("deleted")
