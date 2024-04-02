@@ -2,7 +2,7 @@ import { jsonStringToLex } from "@atproto/api";
 import { type SupabaseClient, createClient } from "@supabase/supabase-js";
 import crypto from "node:crypto";
 import { decrypt } from "./mycrypto";
-
+const table_name = "test";
 export type UserData = {
 	id: number;
 	created_at: string;
@@ -21,7 +21,7 @@ export const getUsersList = async (): Promise<Array<UserData>> => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
 	const ret: Array<UserData> = [];
 	const rawdata: Array<UserData> = await supabase
-		.from("userdata")
+		.from(table_name)
 		.select()
 		.then((data) => {
 			if (/2\d{2}/.test(data.status.toString()) && data.data && data.data.length !== 0) {
@@ -44,7 +44,7 @@ export const getUsersList = async (): Promise<Array<UserData>> => {
 export const deleteuser = async (id: number) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
 	supabase
-		.from("userdata")
+		.from(table_name)
 		.delete()
 		.eq("id", id)
 		.then((data) => {
@@ -56,7 +56,7 @@ export const deleteuser = async (id: number) => {
 export const success = async (id: number) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
 	supabase
-		.from("userdata")
+		.from(table_name)
 		.update({ fail_count: 0 })
 		.eq("id", id)
 		.then((data) => {
@@ -69,7 +69,7 @@ export const success = async (id: number) => {
 export const fail = async (id: number, fail_count: number) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
 	supabase
-		.from("userdata")
+		.from(table_name)
 		.update({ fail_count: fail_count + 1 })
 		.eq("id", id)
 		.then((data) => {
