@@ -1,3 +1,4 @@
+import { cryptosetting } from "./mycrypto";
 import {
 	getUsersList,
 	supabasesetting,
@@ -5,6 +6,7 @@ import {
 } from "./supabase";
 const main = async () => {
 	supabasesetting(process.argv[2], process.argv[3]);
+    cryptosetting(process.argv[4])
 	const userslist = await getUsersList();
 
 	for (const i in userslist) {
