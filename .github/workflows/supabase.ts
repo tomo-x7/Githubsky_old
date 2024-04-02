@@ -2,7 +2,7 @@ import { jsonStringToLex } from "@atproto/api";
 import { type SupabaseClient, createClient } from "@supabase/supabase-js";
 import crypto from "node:crypto";
 import { decrypt } from "./mycrypto";
-const table_name = "test";
+const table_name = "userdata";
 export type UserData = {
 	id: number;
 	created_at: string;
