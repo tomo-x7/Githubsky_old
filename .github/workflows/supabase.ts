@@ -49,7 +49,8 @@ export const deleteuser = async (id: number) => {
 		.eq("id", id)
 		.then((data) => {
 			if ((!/2\d{2}/.test(data.status.toString()))||!data.data) {
-				throw new Error("エラー");
+				writelog(JSON.stringify(data))
+				throw new Error(`エラー:${data.status}`);
 			}
 			return data.data[0];
 		});
@@ -59,7 +60,8 @@ export const deleteuser = async (id: number) => {
 		.insert(olddata)
 		.then((data) => {
 			if (!/2\d{2}/.test(data.status.toString())) {
-				throw new Error("エラー");
+				writelog(JSON.stringify(data))
+				throw new Error(`エラー:${data.status}`);
 			}
 		});
 	supabase
@@ -68,7 +70,8 @@ export const deleteuser = async (id: number) => {
 		.eq("id", id)
 		.then((data) => {
 			if (!/2\d{2}/.test(data.status.toString())) {
-				throw new Error("エラー");
+				writelog(JSON.stringify(data))
+				throw new Error(`エラー:${data.status}`);
 			}
 		});
 };
