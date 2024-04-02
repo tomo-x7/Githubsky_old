@@ -34,7 +34,7 @@ export const getUsersList = async (): Promise<Array<UserData>> => {
 			rawdata[i].bsky_password = decrypt(rawdata[i].bsky_password, rawdata[i].iv);
 			ret.push(rawdata[i]);
 		} catch (e) {
-			writelog(`${rawdata[i].DID}'s password or iv has error`);
+			await writelog(`${rawdata[i].DID}'s password or iv has error`);
 			fail(rawdata[i].id, rawdata[i].fail_count);
 		}
 	}
@@ -47,9 +47,9 @@ export const deleteuser = async (id: number) => {
 		.from(table_name)
 		.select()
 		.eq("id", id)
-		.then((data) => {
+		.then(async (data) => {
 			if ((!/2\d{2}/.test(data.status.toString()))||!data.data) {
-				writelog(JSON.stringify(data))
+				await writelog(JSON.stringify(data))
 				throw new Error(`エラー:${data.status}`);
 			}
 			return data.data[0];
@@ -58,9 +58,9 @@ export const deleteuser = async (id: number) => {
 	await supabase
 		.from("deleted")
 		.insert(olddata)
-		.then((data) => {
+		.then(async (data) => {
 			if (!/2\d{2}/.test(data.status.toString())) {
-				writelog(JSON.stringify(data))
+				await writelog(JSON.stringify(data))
 				throw new Error(`エラー:${data.status}`);
 			}
 		});
@@ -68,9 +68,9 @@ export const deleteuser = async (id: number) => {
 		.from(table_name)
 		.delete()
 		.eq("id", id)
-		.then((data) => {
+		.then(async (data) => {
 			if (!/2\d{2}/.test(data.status.toString())) {
-				writelog(JSON.stringify(data))
+				await writelog(JSON.stringify(data))
 				throw new Error(`エラー:${data.status}`);
 			}
 		});
@@ -102,9 +102,9 @@ export const fail = async (id: number, fail_count: number) => {
 		});
 };
 
-export const writelog = (log: string | number | Error | unknown) => {
+export const writelog = async (log: string | number | Error | unknown) => {
 	if (supabase === undefined) throw new Error("Please run supabase settings before");
-	supabase
+	await supabase
 		.from("errorlog")
 		.insert({ errorlog: log })
 		.then((data) => {});

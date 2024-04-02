@@ -25,10 +25,10 @@ const main = async () => {
 					imgblob || undefined,
 				);
 			} else {
-				writelog(`${userdata.DID}:何かおかしい\n${userdata.count}\n${userdata.lastweek}`)
+				await writelog(`${userdata.DID}:何かおかしい\n${userdata.count}\n${userdata.lastweek}`)
 			}
 		} catch (e) {
-			writelog(e);
+			await writelog(e);
 		}
 	}
 

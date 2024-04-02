@@ -68,7 +68,7 @@ export const post = async (
 		}
 		success(id);
 	} catch (e) {
-		writelog(`${DID}の投稿時エラー\n${e}`);
+		await writelog(`${DID}の投稿時エラー\n${e}`);
 		fail(id, fail_count);
 	}
 };
