@@ -1,0 +1,30 @@
+name: autodelete
+
+on:
+  schedule:
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+jobs:
+  build:
+    name: autodelete
+    runs-on: ubuntu-latest
+    steps:
+      # - name: ls
+      #   run: ls -l
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+      - name: checkversion
+        run: node --version
+      - name: main
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{secrets.SUPABASE_SERVICE_ROLE_KEY}}
+          BLUESKY_PASSWORD_KEY: ${{secrets.BLUESKY_PASSWORD_KEY}}
+        run: npm run autodelete $SUPABASE_URL $SUPABASE_SERVICE_ROLE_KEY $BLUESKY_PASSWORD_KEY

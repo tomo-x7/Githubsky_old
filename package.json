@@ -5,6 +5,7 @@
   "main": "main.ts",
   "scripts": {
     "post": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register .github/workflows/main.ts",
+    "autodelete":"./node_modules/.bin/ts-node --files -r tsconfig-paths/register .github/workflows/autodelete.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
