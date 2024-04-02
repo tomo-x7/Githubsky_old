@@ -40,9 +40,6 @@ export const getUsersGithubData = async (username: string): Promise<{ count: num
 	let commitcount = 0;
 	const yesterday = dayjs().tz().subtract(1, "d").hour(0).minute(0).second(0);
 	const today = dayjs().tz().hour(0).minute(0).second(0);
-	console.log(dayjs().tz().format());
-	console.log(lastgetday.format());
-	console.log(`${yesterday.format()}\n`);
 	const pushdata = alldata
 		.map((data) => {
 			const day = dayjs(data.created_at).tz();
