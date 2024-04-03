@@ -9,7 +9,7 @@ dayjs.locale("ja");
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault("Asia/Tokyo");
-const yesterday=dayjs().tz().subtract(1,'d')
+const yesterday = dayjs().tz().subtract(1, "d");
 type week = {
 	0: number;
 	1: number;
@@ -20,7 +20,7 @@ type week = {
 	6: number;
 };
 let graphmaxscale = 20;
-export type params = { count: number; lastweek: week };
+export type params = { count: number; lastweek: week; star?: number };
 export const elem = (params: params) => {
 	const lastweekarray = [
 		params.lastweek[0],
@@ -44,7 +44,18 @@ export const elem = (params: params) => {
 						直近一週間のコミット数:
 						<div style={style.count}>{lastweekarray.reduce((sum, element) => sum + element, 0)}</div>
 					</div>
-					{/* <div style={{ display: "flex" }}>{today.format()}</div> */}
+					<div
+						style={(() => {
+							console.log(params.star)
+							if (params.star) {
+								return { display: "flex" };
+							}
+							return { display: "none" };
+						})()}
+					>
+						直近一週間で獲得したスター:
+						<div style={style.count}>{params.star}</div>
+					</div>
 				</div>
 				<div style={{ display: "flex", flexDirection: "row" }}>
 					<div style={style.graphscale}>
