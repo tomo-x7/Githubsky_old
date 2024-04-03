@@ -46,7 +46,6 @@ export const elem = (params: params) => {
 					</div>
 					<div
 						style={(() => {
-							console.log(params.star)
 							if (params.star) {
 								return { display: "flex" };
 							}
