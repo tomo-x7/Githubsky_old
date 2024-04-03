@@ -57,14 +57,7 @@ export const post = async (
 				},
 			});
 		} else {
-			//失敗した場合、とりあえず画像なしでポスト
-			//今後削除するかも
-			console.log('faild to get image')
-			await agent.post({
-				text: message.text,
-				facets: message.facets,
-				createdAt: new Date().toISOString(),
-			});
+			writelog(`${DID}の画像取得エラー`)
 		}
 		success(id);
 	} catch (e) {

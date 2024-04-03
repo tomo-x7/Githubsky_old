@@ -99,7 +99,7 @@ export const success = async (id: number) => {
 		.update({ fail_count: 0 })
 		.eq("id", id)
 		.then((data) => {
-			console.log(id);
+			console.log(`success:${id}`);
 			if (!/2\d{2}/.test(data.status.toString())) {
 				throw new Error(`エラー:${JSON.stringify(data)}`);
 			}
@@ -112,7 +112,7 @@ export const fail = async (id: number, fail_count: number) => {
 		.update({ fail_count: fail_count + 1 })
 		.eq("id", id)
 		.then((data) => {
-			console.log(id);
+			console.log(`fail:${id}`);
 			if (!/2\d{2}/.test(data.status.toString())) {
 				throw new Error(`エラー:${JSON.stringify(data)}`);
 			}
