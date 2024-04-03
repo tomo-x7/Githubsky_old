@@ -1,8 +1,8 @@
 import type { week } from "./github";
 
-export const getimg = async (count: number, lastweek: week) => {
+export const getimg = async (count: number, lastweek: week,star?:number) => {
 	const rawdata = await fetch(
-		`https://githubsky.vercel.app/api/createimg?count=${count}&lastweek=${JSON.stringify(lastweek)}`,
+		`https://githubsky.vercel.app/api/createimg?count=${count}&lastweek=${JSON.stringify(lastweek)}&star=${star}`,
 	);
 	if (!rawdata.ok) {
 		return false;

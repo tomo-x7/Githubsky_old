@@ -10,11 +10,11 @@ const main = async () => {
 
 	for (const i in userslist) {
 		try {
-			const userdata: UserData & { count?: number; lastweek?: week } = userslist[i];
+			const userdata: UserData & { count?: number; lastweek?: week ;star?:number} = userslist[i];
 			Object.assign(userdata, await getUsersGithubData(userdata.github_name));
 			if (userdata.count !== undefined && userdata.lastweek !== undefined) {
 				//APIを叩いて画像取得
-				const imgblob = await getimg(userdata.count, userdata.lastweek);
+				const imgblob = await getimg(userdata.count, userdata.lastweek,userdata.star);
 				post(
 					userdata.bsky_password,
 					userdata.github_name,
