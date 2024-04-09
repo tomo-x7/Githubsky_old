@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@atproto/api": "^0.12.2",
+    "@napi-rs/canvas": "^0.1.51",
     "@supabase/supabase-js": "^2.41.1",
+    "canvas": "^2.11.2",
+    "chart.js": "^4.4.2",
     "dayjs": "^1.11.10",
     "next": "14.1.4",
     "react": "^18",
