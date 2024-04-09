@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { elem, type params } from "./img";
+import { graph } from "./graph";
 
 const size = {
 	width: 960,
@@ -20,8 +21,5 @@ export async function GET(rawrequest: NextRequest) {
 		),
 		star: star !== null ? Number.parseInt(star) : undefined,
 	};
-	return new ImageResponse(elem(params), {
-		width: 1074,
-		height: 564,
-	});
+	return new NextResponse(await graph(params), { status: 200, headers: { "Content-Type": "image/png" } });
 }
