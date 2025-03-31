@@ -1,8 +1,9 @@
 {
     "redirects": [
-      {
-        "source": "/",
-        "destination": "https://githubsky.tomo-x.win/"
-      }
+        {
+            "source": "/(.*)",
+            "destination": "https://githubsky.tomo-x.win/",
+            "permanent": true
+        }
     ]
-  }
+}
