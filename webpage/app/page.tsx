@@ -26,58 +26,8 @@ fetch("https://githubsky.vercel.app/ogp.png")
 export default function Page() {
 	return (
 		<>
-			<h1>Githubsky V1.1</h1>
-			<p>
-				前日のGithubのコミット数と直近一週間のコミット数のグラフを自動でBlueskyに投稿するサービスです。
-				<br />
-				七回投稿に失敗すると自動的にデータを削除します。投稿されなくなった場合は再登録をお願いします。
-			</p>
-			<div className={style.touroku}>
-				<h2>登録はこちら</h2>
-			</div>
-			<div className={style.steps}>
-				<Client ogpimg={ogpimg} />
-				<div className={style.loader_wrapper} id="loading">
-					<div className={style.loader}>Loading...</div>
-				</div>
-			</div>
-			<h2>Q&A</h2>
-			<ul>
-				<li>
-					登録解除したい
-					<p>{kotira}から、Githubskyに登録したアプリパスワードを削除してください。</p>
-				</li>
-				<li>
-					自分だけ自動投稿されなくなった
-					<p>
-						直近一週間でコミットしていない場合は投稿されません。また、Githubのトークンを登録していない場合、プライベートリポジトリへのコミットは対象になりません。
-					</p>
-				</li>
-				<li>
-					パブリックリポジトリへのコミットが反映されない、トークンを登録しているのに反映されない
-					<p>もう一度登録してみてください。それでもダメな場合は開発者までお問い合わせください</p>
-				</li>
-				<li>
-					設定を変更したい（連携先など）
-					<p>一回{kotira}からアプリパスワードを削除して、再登録してください</p>
-				</li>
-			</ul>
-			<hr />
-			<div>
-				Githubsky V1.1
-				<br />
-				Created by <Mylink href="https://bsky.app/profile/tomo-x.bsky.social">@tomo-x</Mylink>
-				<br />
-				<div>
-					お問い合わせ先:<Mylink href="https://github.com/tomo-x7/githubsky">Github</Mylink>・
-					<Mylink href="https://bsky.app/profile/tomo-x.bsky.social">Bluesky</Mylink>・
-					<Mylink href="https://twitter.com/tomo_x_79">Twitter</Mylink>
-				</div>
-				このサービスはオープンソースです。ソースコードは
-				<Link href="https://github.com/tomo-x7/githubsky" target="__blank" rel="noopener noreferrer">
-					こちら
-				</Link>
-			</div>
+			<h1>GithubskyはV2に移行しました</h1>
+			V2は<a href="https://githubsky.tomo-x.win">こちら</a>
 		</>
 	);
 }
